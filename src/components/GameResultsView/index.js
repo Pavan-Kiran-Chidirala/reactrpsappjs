@@ -12,46 +12,46 @@ import './index.css'
 const GameResultsView = props => {
   const {choicesList, isShow, checkResult, newArray, text, restartGame} = props
   const showGame = () => (
-    <>
-      {!isShow && (
-        <GameViewContainer>
+    <GameViewContainer>
+      {isShow && (
+        <>
           <GameButton
             type="button"
-            key={choicesList[0].id}
             data-testid="rockButton"
+            onClick={() => checkResult(choicesList[0].id)}
           >
             <GameImage
               src={choicesList[0].imageUrl}
               alt={choicesList[0].id}
-              onClick={() => checkResult(choicesList[0].id)}
+              key={choicesList[0].id}
             />
           </GameButton>
           <GameButton
             type="button"
-            key={choicesList[1].id}
-            data-testid="paperButton"
+            data-testid="scissorsButton"
+            onClick={() => checkResult(choicesList[1].id)}
           >
             <GameImage
               src={choicesList[1].imageUrl}
               alt={choicesList[1].id}
-              onClick={() => checkResult(choicesList[1].id)}
+              key={choicesList[1].id}
             />
           </GameButton>
           <GameButton
             type="button"
-            key={choicesList[2].id}
-            data-testid="scissorsButton"
+            data-testid="paperButton"
+            onClick={() => checkResult(choicesList[2].id)}
           >
             <GameImage
               src={choicesList[2].imageUrl}
               alt={choicesList[2].id}
-              onClick={() => checkResult(choicesList[2].id)}
+              key={choicesList[2].id}
             />
           </GameButton>
-        </GameViewContainer>
+        </>
       )}
-      {isShow && (
-        <GameViewContainer>
+      {!isShow && (
+        <>
           <ResultImageContainer>
             <ResultName>YOU</ResultName>
             <GameImage src={newArray[0].imageUrl} alt="your choice" />
@@ -70,9 +70,9 @@ const GameResultsView = props => {
               PLAY AGAIN
             </button>
           </ResultImageContainer>
-        </GameViewContainer>
+        </>
       )}
-    </>
+    </GameViewContainer>
   )
   return showGame()
 }

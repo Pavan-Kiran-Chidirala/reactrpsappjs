@@ -19,11 +19,29 @@ import {
   PopUpImage,
 } from './styledComponents'
 
+const choicesList = [
+  {
+    id: 'ROCK',
+    imageUrl:
+      'https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rock-image.png',
+  },
+  {
+    id: 'SCISSORS',
+    imageUrl:
+      'https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/scissor-image.png',
+  },
+  {
+    id: 'PAPER',
+    imageUrl:
+      'https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/paper-image.png',
+  },
+]
+
 class RpsPage extends Component {
   state = {
-    isShow: false,
-    newArray: [],
-    text: '',
+    isShow: true,
+    newArray: [choicesList[0], choicesList[1]],
+    text: 'YOU WON',
     score: 0,
   }
 
@@ -58,10 +76,9 @@ class RpsPage extends Component {
     }
   }
 
-  restartGame = () => this.setState({isShow: false, newArray: [], text: ''})
+  restartGame = () => this.setState({isShow: true})
 
   checkResult = id => {
-    const {choicesList} = this.props
     const {score} = this.state
     const choice2 = choicesList[Math.floor(Math.random() * choicesList.length)]
     const choice1 = choicesList.filter(eachValue => eachValue.id === id)
@@ -75,7 +92,7 @@ class RpsPage extends Component {
       newScore = score
     }
     this.setState({
-      isShow: true,
+      isShow: false,
       newArray: [choice1[0], choice2],
       text: result,
       score: newScore,
@@ -84,7 +101,6 @@ class RpsPage extends Component {
 
   render() {
     const {isShow, newArray, text, score} = this.state
-    const {choicesList} = this.props
     return (
       <MainContainer>
         <ScoreView score={score} />
